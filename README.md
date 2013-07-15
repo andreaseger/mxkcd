@@ -1,4 +1,4 @@
-mxkcd
+[@mxkcd](https://twitter.com/mxkcd)
 =====
 
 xkcd rss to twitter bot optimized for mobile
