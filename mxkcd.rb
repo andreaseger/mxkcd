@@ -31,8 +31,8 @@ end
 def build_tweet item
   [
     item.title,
-    item.link.insert(7,'m.'), 
-    item.description.match(/img src="(?<image>.*\.png)"/)[:image]
+    item.description.match(/img src="(?<image>.*\.png)"/)[:image],
+    item.link.insert(7,'m.')
   ].join(' ')
 end
 
