@@ -102,7 +102,9 @@ class XkcdTime < Xkcd
       items = JSON.parse data.read, object_class: OpenStruct
       print "#{Time.now.utc.strftime "%FT%R "}"
       last_xkcd = nil
-      items.select{ |item| Time.at(item.epoch) > xkcd_time_tracker }.each do |item|
+      todo = items.select{ |item| Time.at(item.epoch) > xkcd_time_tracker }
+      (puts "no new time frames" and exit) if todo.empty?
+      todo.each do |item|
         if tweet item
           last_xkcd = item
           sleep 1 #short delay after each tweet
