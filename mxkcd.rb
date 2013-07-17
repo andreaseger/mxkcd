@@ -49,7 +49,10 @@ end
 url = 'http://xkcd.com/rss.xml'
 open(url) do |rss|
   feed = RSS::Parser.parse(rss)
-  feed.items.select{ |item| item.pubDate > last_xkcd }.each do |item|
+  print "#{Time.now.utc.strftime "%FT%R "}"
+  todo = feed.items.select{ |item| item.pubDate > last_xkcd }
+  (puts "no new comics" and exit) if todo.empty?
+  todo.each do |item|
     tweet item
   end
   update_last_xkcd feed.items.first
