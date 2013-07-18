@@ -1,3 +1,4 @@
 config/auth.json
 last_tweeted_xkcd
 last_tweeted_time_xkcd
+mxkcd.log
