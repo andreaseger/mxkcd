@@ -41,6 +41,7 @@ class Xkcd
   end
 
   def tweet item
+    print "#{Time.now.utc.strftime "%FT%R "}"
     tweet = build_tweet item
     if tweet.size < 140
       Twitter.update tweet
@@ -58,10 +59,9 @@ class Xkcd
   def run
     open(URL) do |rss|
       feed = RSS::Parser.parse(rss)
-      print "#{Time.now.utc.strftime "%FT%R "}"
       last_xkcd = nil
       todo = feed.items.select{ |item| item.pubDate > xkcd_tracker }
-      (puts "no new comics" and exit) if todo.empty?
+      #(puts "no new comics" and exit) if todo.empty?
       todo.reverse.each do |item|
         if tweet item
           last_xkcd = item
@@ -116,5 +116,5 @@ class XkcdTime < Xkcd
 end
 
 Xkcd.new.run
-XkcdTime.new.run
+#XkcdTime.new.run
 
