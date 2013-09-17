@@ -1,3 +1,5 @@
+#! /usr/bin/env ruby
+
 require 'open-uri'
 require 'twitter'
 require 'rss'
@@ -34,7 +36,7 @@ class Xkcd
   def build_tweet item
     [
       item.title,
-      item.description.match(/img src="(?<image>.*\.png)"/)[:image],
+      item.description.match(/img src="(?<image>.*\.(png|gif))"/)[:image],
       item.link.insert(7,'m.'),
       "#xkcd"
     ].join(' ')
@@ -73,6 +75,7 @@ class Xkcd
   end
 end
 
+=begin
 class XkcdTime < Xkcd
   URL2 = 'http://xkcd.mscha.org/time_latest.csv'
   URL = 'http://xkcd.mscha.org/time.json'
@@ -114,6 +117,7 @@ class XkcdTime < Xkcd
     end
   end
 end
+=end
 
 Xkcd.new.run
 #XkcdTime.new.run
